@@ -1,17 +1,17 @@
 module Bus (
     //Mux
-    input  [7:0] BusMuxInRZ,
-    input  [7:0] BusMuxInRA,
-    input  [7:0] BusMuxInRB,
+    input  [31:0] BusMuxInRZ,
+    input  [31:0] BusMuxInRA,
+    input  [31:0] BusMuxInRB,
     //Encoder
     input        RZout,
     input        RAout,
     input        RBout,
 
-    output wire [7:0] BusMuxOut
+    output wire [31:0] BusMuxOut
 );
 
-reg [7:0] q;
+reg [31:0] q;
 
 always @(*) begin
     if (RZout) q = BusMuxInRZ;

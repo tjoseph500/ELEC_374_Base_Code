@@ -1,14 +1,14 @@
 module datapath(
     input wire clock, clear,
-    input wire [7:0] A,
-    input wire [7:0] RegisterAImmediate,
+    input wire [31:0] A,
+    input wire [31:0] RegisterAImmediate,
     input wire RZout, RAout, RBout,
     input wire RAin, RBin, RZin
 );
 
-wire [7:0] BusMuxOut, BusMuxInRZ, BusMuxInRA, BusMuxInRB;
+wire [31:0] BusMuxOut, BusMuxInRZ, BusMuxInRA, BusMuxInRB;
 
-wire [7:0] Zregin;
+wire [31:0] Zregin;
 
 //Devices
 register RA(clear, clock, RAin, RegisterAImmediate, BusMuxInRA);
