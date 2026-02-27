@@ -37,8 +37,8 @@ shiftRight shr  (ALUin, BusMuxOut, shr_out);
 shiftRightA shra (ALUin, BusMuxOut, shra_out);
 shiftLeft shl  (ALUin, BusMuxOut, shl_out);
 
-ROR ror  (ALUin, BusMuxOut, ror_out);
-ROL rol  (ALUin, BusMuxOut, rol_out);
+rotate_right ror  (ALUin, BusMuxOut, ror_out);
+rotate_left rol  (ALUin, BusMuxOut, rol_out);
 
 AND and_OP (ALUin, BusMuxOut, and_out);
 OR or_OP (ALUin, BusMuxOut, or_out);
