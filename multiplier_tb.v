@@ -2,7 +2,7 @@
 module tb_booth_multiplier;
 
     reg  signed [31:0] M, Q;
-    wire signed [31:0] Result;
+    wire signed [63:0] Result;
 
     booth_multiplier dut(M, Q, Result);
 
