@@ -41,7 +41,7 @@ set_global_assignment -name DEVICE 5CEBA4F23C7
 set_global_assignment -name TOP_LEVEL_ENTITY datapath
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:22:21  FEBRUARY 09, 2026"
-set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Standard Edition"
+set_global_assignment -name LAST_QUARTUS_VERSION "18.1.1 Lite Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
@@ -49,11 +49,6 @@ set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
 set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
-set_global_assignment -name VERILOG_FILE datapath.v
-set_global_assignment -name VERILOG_FILE datapath_tb.v
-set_global_assignment -name VERILOG_FILE adder.v
-set_global_assignment -name VERILOG_FILE register.v
-set_global_assignment -name VERILOG_FILE bus.v
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
@@ -66,4 +61,38 @@ set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id datapath_tb
 set_global_assignment -name EDA_TEST_BENCH_RUN_SIM_FOR "500 ns" -section_id datapath_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME datapath_tb -section_id datapath_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE datapath_tb.v -section_id datapath_tb
+set_global_assignment -name VERILOG_FILE twoCom_tb.v
+set_global_assignment -name VERILOG_FILE twoCom.v
+set_global_assignment -name VERILOG_FILE subtract_tb.v
+set_global_assignment -name VERILOG_FILE subtract.v
+set_global_assignment -name VERILOG_FILE rotate_right.v
+set_global_assignment -name VERILOG_FILE rotate_left.v
+set_global_assignment -name VERILOG_FILE rotate.v
+set_global_assignment -name VERILOG_FILE or_tb.v
+set_global_assignment -name VERILOG_FILE or.v
+set_global_assignment -name VERILOG_FILE oneCom_tb.v
+set_global_assignment -name VERILOG_FILE oneCom.v
+set_global_assignment -name VERILOG_FILE not_tb.v
+set_global_assignment -name VERILOG_FILE not.v
+set_global_assignment -name VERILOG_FILE multiplier_tb.v
+set_global_assignment -name VERILOG_FILE multiplier.v
+set_global_assignment -name VERILOG_FILE divider_tb.v
+set_global_assignment -name VERILOG_FILE divider.v
+set_global_assignment -name VERILOG_FILE and_tb.v
+set_global_assignment -name VERILOG_FILE and.v
+set_global_assignment -name VERILOG_FILE datapath.v
+set_global_assignment -name VERILOG_FILE datapath_tb.v
+set_global_assignment -name VERILOG_FILE adder.v
+set_global_assignment -name VERILOG_FILE register.v
+set_global_assignment -name VERILOG_FILE bus.v
+set_global_assignment -name VERILOG_FILE alu.v
+set_global_assignment -name VERILOG_FILE Datapath_top.v
+set_global_assignment -name VERILOG_FILE or_datapath_tb.v
+set_global_assignment -name VERILOG_FILE add_datapath_tb.v
+set_global_assignment -name VERILOG_FILE sub_datapath_tb.v
+set_global_assignment -name VERILOG_FILE mul_datapath_tb.v
+set_global_assignment -name VERILOG_FILE div_datapath_tb.v
+set_global_assignment -name VERILOG_FILE shr_datapath_tb.v
+set_global_assignment -name VERILOG_FILE neg_datapath_tb.v
+set_global_assignment -name VERILOG_FILE not_datapath_tb.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
