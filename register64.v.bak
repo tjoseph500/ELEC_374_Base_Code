@@ -1,5 +1,5 @@
-module register #(parameter DATA_WIDTH_IN = 32, DATA_WIDTH_OUT = 32, INIT = 32'h0)(
-	input clear, clock enable,
+module register64 #(parameter DATA_WIDTH_IN = 64, DATA_WIDTH_OUT = 64, INIT = 64'h0)(
+	input clear, clock, enable,
 	input [DATA-WIDTH_IN-1:0]BusMuxOut
 	output wire [DATA_WIDTH_OUT-1:0]BusMuxIn
 );
@@ -16,4 +16,3 @@ always @ (posedge clock)
 		end
 	assign BusMuxIn = q[DATA_WIDTH_OUT-1:0];
 endmodule
-		

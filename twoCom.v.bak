@@ -1,0 +1,29 @@
+//TwoCom (1)
+module twoCom(A1, Result1);
+
+input [31:0] A1;
+output [31:0] Result1; 
+
+reg [31:0] Result1;
+reg [31:0] temp;
+
+integer i;
+
+always@(A1)
+	begin
+	
+end
+
+OneCom OneCom
+(
+	.A1(A), 
+	.temp(Result),
+);
+	 
+Adder adder
+(
+	.temp(A),
+	1’b1(B), 
+	.Result1(Result),
+);
+endmodule

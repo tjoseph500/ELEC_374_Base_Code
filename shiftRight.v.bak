@@ -1,0 +1,25 @@
+module shiftRight(
+    input  [31:0] A,
+    input  [31:0] B,
+    output [31:0] Result
+);
+
+reg [31:0] temp;
+integer i;
+
+always @(A or B)
+begin
+    temp = 32'b0;
+
+    if (B < 32)
+	 begin
+        for (i = 0; i < 32-B; i = i + 1)
+		  begin
+            temp[i] = A[i+B];
+        end
+    end
+end
+
+assign Result = temp;
+
+endmodule

@@ -1,4 +1,4 @@
-module rotate_right(A, shiftamount, Result);
+module shiftRight(A, shiftamount, Result);
 
 input  [31:0] A;
 input  [4:0] shiftamount;     
@@ -9,13 +9,13 @@ reg [31:0] temp;
 
 integer i;
 
-always @(A or shiftamount)
+always @(*)
 begin
     temp = A;
 
     for (i = 0; i < shiftamount; i = i + 1)
     begin
-        Result[31] = temp[0];
+        Result[31] = 0;
         Result[30] = temp[31];
         Result[29] = temp[30];
         Result[28] = temp[29];

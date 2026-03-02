@@ -1,0 +1,5 @@
+module ALU(clear, clock, ADD, SUB, MUL, DIV, SHR, SHRA, SHL, ROR, ROL, AND, OR, NEG, NOT, ALUin, ALUout);
+
+
+
+endmodule

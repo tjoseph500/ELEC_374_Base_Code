@@ -1,28 +1,23 @@
 module register64 #(parameter INIT = 64'h0)(
-	input clear, clock, Zin, Zhighin, Zlowin,
+	input clear, clock, Zin,
 	input [63:0]ALU_OUT,
-	output wire [31:0]BusMuxOut
+	output wire [31:0]BusMuxIn_Zhigh,
+	output wire [31:0]BusMuxIn_Zlow
 );
-reg [31:0]q;
+reg [63:0]q;
 
 initial q = INIT;
 always @ (posedge clock)
 		begin
 			if (clear) begin
-				q <= {31{1'b0}};
+				q <= {64{1'b0}};
 			end
-			else if (Zin)
+			else
+			if (Zin)
 			begin
-				q <= ALU_OUT[31:0];
-				if (Zhighin)
-				begin
-				q <= ALU_OUT[63:32];
-				end
-				else if (Zlowin)
-				begin
-				q <= ALU_OUT[31:0];
-				end
+				q <= ALU_OUT[63:0];
 			end
 		end
-	assign BusMuxOut = q[31:0];
+	assign BusMuxIn_Zlow = q[31:0];
+	assign BusMuxIn_Zhigh = q[63:32];
 endmodule

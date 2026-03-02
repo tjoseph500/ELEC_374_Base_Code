@@ -34,17 +34,17 @@ booth_multiplier mul  (ALUin, BusMuxOut, mul_out);
 divider div (ALUin, BusMuxOut, div_out);
 
 shiftRight shr  (ALUin, BusMuxOut, shr_out);
-shiftRightA shra (ALUin, BusMuxOut, shra_out);
+//shiftRightA shra (ALUin, BusMuxOut, shra_out);
 shiftLeft shl  (ALUin, BusMuxOut, shl_out);
 
 rotate_right ror  (ALUin, BusMuxOut, ror_out);
 rotate_left rol  (ALUin, BusMuxOut, rol_out);
 
-AND and_OP (ALUin, BusMuxOut, and_out);
-OR or_OP (ALUin, BusMuxOut, or_out);
+AND_Operation and_OP (ALUin, BusMuxOut, and_out);
+OR_Operation or_OP (ALUin, BusMuxOut, or_out);
 
 twoCom neg  (ALUin, neg_out);
-oneCom not  (ALUin, not_out);
+oneCom not_OP  (ALUin, not_out);
 
 
 // =========================

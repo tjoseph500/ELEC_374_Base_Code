@@ -1,5 +1,5 @@
 // AND 
-module AND(A_and, B_and, Result_and);
+module AND_Operation(A_and, B_and, Result_and);
 
 input [31:0] A_and, B_and;
 output [31:0] Result_and; 

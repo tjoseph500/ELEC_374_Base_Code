@@ -1,0 +1,43 @@
+// Booth Multiplier
+module booth_multiplier (
+    input [31:0] M,         
+    input [31:0] Q,        
+    output [63:0] result
+);
+
+    integer i;
+    wire [32:0] Q_Implicit;
+	 reg [63:0] result
+	 
+	 assign Q_Implicit = Q << 1;
+
+    always @(*) begin
+        partial_sum = 16'd0;
+       
+        for (i = 1; i < 32; i = i + 2)
+		  begin
+				if(Q_Implicit[i+1]==1&&Q_Implicit[i]==0&&Q_Implicit[i-1]==0)
+				{
+					//Case -2
+				}
+				else if(Q_Implicit[i+1]==0&&Q_Implicit[i]==0&&Q_Implicit[i-1]==1||Q_Implicit[i+1]==0&&Q_Implicit[i]==1&&Q_Implicit[i-1]==0)
+				{
+					//Case 1
+				}
+				else if(Q_Implicit[i+1]==1&&Q_Implicit[i]==0&&Q_Implicit[i-1]==1||Q_Implicit[i+1]==1&&Q_Implicit[i]==1&&Q_Implicit[i-1]==0)
+				{
+					//Case -1
+				}
+				else if(Q_Implicit[i+1]==0&&Q_Implicit[i]==1&&Q_Implicit[i-1]==1)
+				{
+					//Case +2
+				}
+				else 
+				{
+					//Case 0
+				}
+		  
+        end
+    end
+
+endmodule

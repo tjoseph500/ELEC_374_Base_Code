@@ -1,5 +1,5 @@
 // OR 
-module OR(A_or, B_or, Result_or);
+module OR_Operation(A_or, B_or, Result_or);
 
 input [31:0] A_or, B_or;
 output [31:0] Result_or; 
