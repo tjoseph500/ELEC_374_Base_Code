@@ -1,0 +1,129 @@
+`timescale 1ns/10ps
+
+module datapath_tb;
+    // --- Signal Declarations ---
+    reg         PCout, Zlowout, MDRout, R5out;           
+    reg         MARin, Zin, PCin, MDRin, IRin, Yin;    
+    reg         IncPC, Read, NEG, R2in, R5in; 
+    reg         Clock; 
+    reg [31:0]  Mdatain;      
+
+    // Extra register signals (referenced in Default state but missing in declaration)
+    reg         R3out, R7out;
+
+    // --- State Parameters ---
+    parameter Default     = 4'b0000, 
+              Reg_load1a  = 4'b0001, Reg_load1b = 4'b0010, 
+              Reg_load2a  = 4'b0011, Reg_load2b = 4'b0100, 
+              T0          = 4'b0101, T1         = 4'b0110, 
+              T2          = 4'b0111, T3         = 4'b1000, 
+              T4          = 4'b1001, T5         = 4'b1010;
+
+    reg [3:0] Present_state = Default;
+
+    // --- Device Under Test (DUT) ---
+    Datapath DUT (
+        PCout, Zlowout, MDRout, R5out, 
+        MARin, Zin, PCin, MDRin, IRin, Yin, 
+        IncPC, Read, NEG, R2in, R5in, 
+        Clock, Mdatain
+    );
+
+    // --- Clock Generation ---
+    initial begin
+        Clock = 0;
+        forever #10 Clock = ~Clock;
+    end
+
+    // --- State Transitions (Sequential Logic) ---
+    always @(posedge Clock) begin
+        case (Present_state)
+            Default:    Present_state <= Reg_load1a;
+            Reg_load1a: Present_state <= Reg_load1b;
+            Reg_load1b: Present_state <= Reg_load2a;
+            Reg_load2a: Present_state <= Reg_load2b;
+            Reg_load2b: Present_state <= T0;
+            T0:         Present_state <= T1;
+            T1:         Present_state <= T2;
+            T2:         Present_state <= T3;
+            T3:         Present_state <= T4;
+            T4:         Present_state <= T5;
+            T5:         Present_state <= Default;
+            default:    Present_state <= Default;
+        endcase
+    end
+
+    // --- Output Logic (Combinational/State Actions) ---
+    always @(Present_state) begin
+        case (Present_state)               
+            Default: begin
+                PCout <= 0;   Zlowout <= 0;   MDRout <= 0;         
+                R3out <= 0;   R7out <= 0;     MARin <= 0;   Zin <= 0;   
+                PCin <= 0;    MDRin <= 0;     IRin <= 0;    Yin <= 0;   
+                IncPC <= 0;   Read <= 0;      NEG <= 0; 
+                R2in <= 0;    R5in <= 0;    
+                Mdatain <= 32'h00000000;
+            end
+
+            Reg_load1a: begin   
+                // Load R5 with a value to negate
+                Mdatain <= 32'h00000034;
+                Read <= 1; MDRin <= 1;              
+            end
+
+            Reg_load1b: begin   
+                Read <= 0; MDRin <= 0;
+                MDRout <= 1; R5in <= 1;   
+            end
+
+            Reg_load2a: begin   
+                MDRout <= 0; R5in <= 0;
+                // Initialize R2 (optional)
+                Mdatain <= 32'h00000000;
+                Read <= 1; MDRin <= 1;   
+            end
+
+            Reg_load2b: begin  
+                Read <= 0; MDRin <= 0;
+                MDRout <= 1; R2in <= 1;   
+            end
+
+            // --- Instruction fetch ---
+            T0: begin                                                                                  
+                MDRout <= 0; R2in <= 0;
+                PCout <= 1; MARin <= 1; IncPC <= 1; Zin <= 1;   
+            end
+
+            T1: begin
+                PCout <= 0; MARin <= 0; IncPC <= 0; Zin <= 0;
+                Zlowout <= 1; PCin <= 1; Read <= 1; MDRin <= 1;   
+                // Opcode for “neg R2, R5” (placeholder — replace with correct pattern)
+                Mdatain <= 32'h00000000;
+            end
+
+            T2: begin
+                Zlowout <= 0; PCin <= 0; Read <= 0; MDRin <= 0;
+                MDRout <= 1; IRin <= 1;    
+            end
+
+            // --- Execute NEG ---
+            // T3 R5out, Yin
+            T3: begin
+                MDRout <= 0; IRin <= 0;
+                R5out <= 1; Yin <= 1;
+            end
+
+            // T4 NEG, Zin   (B input unused for unary op; keep bus quiet)
+            T4: begin
+                R5out <= 0; Yin <= 0;
+                NEG <= 1; Zin <= 1;
+            end
+
+            // T5 Zlowout, R2in
+            T5: begin
+                NEG <= 0; Zin <= 0;
+                Zlowout <= 1; R2in <= 1;
+            end
+        endcase
+    end
+endmodule
