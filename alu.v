@@ -15,7 +15,7 @@ module ALU(
 
 wire [31:0] add_out, sub_out;
 wire [63:0] mul_out;
-wire [31:0] div_out;
+wire [63:0] div_out;
 
 wire [31:0] shr_out, shra_out, shl_out;
 wire [31:0] ror_out, rol_out;
@@ -34,7 +34,7 @@ booth_multiplier mul  (ALUin, BusMuxOut, mul_out);
 divider div (ALUin, BusMuxOut, div_out);
 
 shiftRight shr  (ALUin, BusMuxOut, shr_out);
-//shiftRightA shra (ALUin, BusMuxOut, shra_out);
+shiftRightA shra (ALUin, BusMuxOut, shra_out);
 shiftLeft shl  (ALUin, BusMuxOut, shl_out);
 
 rotate_right ror  (ALUin, BusMuxOut, ror_out);

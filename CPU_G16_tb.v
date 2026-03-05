@@ -5,9 +5,9 @@
 
 module CPU_G16_tb;
 
-    reg PCout, Zlowout, MDRout, R5out, R6out;
+    reg PCout, Zlowout, MDRout, R7out, R0out, R4out;
     reg MARin, Zin, PCin, MDRin, IRin, Yin;
-    reg IncPC, Read, AND, R2in, R5in, R6in;
+    reg IncPC, Read, SHR, R7in, R0in, R4in;
     reg Clock, stateClock;
 	 reg clear;
     reg [31:0] Mdatain;
@@ -67,33 +67,33 @@ module CPU_G16_tb;
                 PCout <= 0; Zlowout <= 0; MDRout <= 0;
                 MARin <= 0; Zin <= 0;
                 PCin  <= 0; MDRin <= 0; IRin <= 0; Yin <= 0;
-                IncPC <= 0; Read  <= 0; AND  <= 0;
-                R2in  <= 0; R5in  <= 0; R6in <= 0;
+                IncPC <= 0; Read  <= 0; SHR  <= 0;
+                R7in  <= 0; R0in  <= 0; R4in <= 0;
 					 clear <= 0;
                 Mdatain <= 32'h00000000;
             end
 
             Reg_load1a: begin
-                Mdatain <= 32'h4d65;
+                Mdatain <= 32'h00000034;
                 Read = 0; MDRin = 0;
                 Read <= 1; MDRin <= 1;
                 #15 Read <= 0; MDRin <= 0;
             end
 
             Reg_load1b: begin
-                MDRout <= 1; R5in <= 1;
-                #15 MDRout <= 0; R5in <= 0;
+                MDRout <= 1; R0in <= 1;
+                #15 MDRout <= 0; R0in <= 0;
             end
 
             Reg_load2a: begin
-                Mdatain <= 32'h3435;
+                Mdatain <= 32'h00000045;
                 Read <= 1; MDRin <= 1;
                 #15 Read <= 0; MDRin <= 0;
             end
 
             Reg_load2b: begin
-                MDRout <= 1; R6in <= 1;
-                #15 MDRout <= 0; R6in <= 0;
+                MDRout <= 1; R4in <= 1;
+                #15 MDRout <= 0; R4in <= 0;
             end
 
             Reg_load3a: begin
@@ -103,8 +103,8 @@ module CPU_G16_tb;
             end
 
             Reg_load3b: begin
-                MDRout <= 1; R2in <= 1;
-                #15 MDRout <= 0; R2in <= 0;
+                MDRout <= 1; R0in <= 1;
+                #15 MDRout <= 0; R0in <= 0;
             end
 
             T0: begin
@@ -125,17 +125,17 @@ module CPU_G16_tb;
             end
 
             T3: begin
-                R5out <= 1; Yin <= 1;
-					 #15 R5out <= 0; Yin <= 0;
+                R0out <= 1; Yin <= 1;
+					 #15 R0out <= 0; Yin <= 0;
             end
 
             T4: begin
-                R6out <= 1; AND <= 1; Zin <= 1;
-					 #15 R6out <= 0; Zin <= 0;
+                R4out <= 1; SHR <= 1; Zin <= 1;
+					 #15 R4out <= 0; Zin <= 0;
             end
 
             T5: begin
-                Zlowout <= 1; R2in <= 1;
+                Zlowout <= 1; R7in <= 1;
             end
 
         endcase

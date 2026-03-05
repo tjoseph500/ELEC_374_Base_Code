@@ -1,7 +1,7 @@
 module booth_multiplier (
     input  wire signed [31:0] M,
     input  wire signed [31:0] Q,
-    output reg  signed [31:0] Result
+    output reg  signed [63:0] Result
 );
 
     integer i;
